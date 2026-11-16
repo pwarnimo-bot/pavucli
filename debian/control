@@ -1,0 +1,24 @@
+Source: pavucli
+Section: sound
+Priority: optional
+Maintainer: pwarnimont <pwarnimo@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               dh-python,
+               pybuild-plugin-pyproject,
+               python3-all,
+               python3-setuptools,
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: pavucli
+Architecture: all
+Depends: pulseaudio-utils,
+         ${misc:Depends},
+         ${python3:Depends},
+Description: pavucontrol-like terminal mixer for PulseAudio and PipeWire
+ pavucli is a curses mixer in the spirit of pavucontrol. It controls the
+ volume, per-channel volume, balance and mute state of playback/recording
+ streams and devices, moves streams between devices, selects ports, sets
+ the default device and switches sound card profiles.
+ .
+ Works with PulseAudio and PipeWire (pipewire-pulse).

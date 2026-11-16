@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=pavucli
+GenericName=Volume Control
+Comment=Adjust PulseAudio / PipeWire volumes, balance, devices and profiles in the terminal
+Exec=pavucli
+Icon=multimedia-volume-control
+Terminal=true
+Categories=AudioVideo;Audio;Mixer;ConsoleOnly;
+Keywords=pavucontrol;pulseaudio;pipewire;volume;mixer;sound;balance;

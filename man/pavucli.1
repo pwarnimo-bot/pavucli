@@ -1,0 +1,89 @@
+.TH PAVUCLI 1 "2026-11-16" "pavucli 0.1.0" "User Commands"
+.SH NAME
+pavucli \- terminal volume control for PulseAudio and PipeWire
+.SH SYNOPSIS
+.B pavucli
+[\fB\-t\fR \fITAB\fR] [\fB\-s\fR \fIPCT\fR] [\fB\-m\fR \fIPCT\fR] [\fB\-\-ascii\fR] [\fB\-\-no\-color\fR] [\fB\-\-no\-mouse\fR]
+.SH DESCRIPTION
+.B pavucli
+is a curses mixer in the spirit of
+.BR pavucontrol (1).
+It shows playback and recording streams, output and input devices and sound card
+profiles, and lets you change volume, per\-channel volume, balance and mute state,
+move streams between devices, select ports, pick the default device and switch
+card profiles. It talks to the server through
+.BR pactl (1)
+and refreshes automatically when anything changes.
+.SH OPTIONS
+.TP
+.BR \-t ", " \-\-tab " " \fITAB\fR
+Tab to open: playback, recording, output, input or config.
+.TP
+.BR \-s ", " \-\-step " " \fIPCT\fR
+Volume step of the arrow keys in percent (default 5).
+.TP
+.BR \-m ", " \-\-max\-volume " " \fIPCT\fR
+Upper end of the volume bars, 100\-400 percent (default 150).
+.TP
+.B \-\-ascii
+Draw with plain ASCII characters.
+.TP
+.B \-\-no\-color
+Disable colours. Also enabled by a non\-empty \fBNO_COLOR\fR variable.
+.TP
+.B \-\-no\-mouse
+Do not capture the mouse (keeps the terminal's own text selection).
+.TP
+.BR \-V ", " \-\-version
+Print the version and exit.
+.SH KEYS
+.TP
+.B Tab, Shift\-Tab, F1\-F5
+Switch tabs.
+.TP
+.B Up/Down, k/j, Home/End
+Select an item.
+.TP
+.B Left/Right, h/l
+Volume down/up by the step. \fBH\fR/\fBL\fR or Shift+arrows: 1 %. PgDn/PgUp: 10 %.
+.TP
+.B 1 ... 9, 0
+Set volume to 10 % ... 90 %, 0 sets 100 %.
+.TP
+.B m
+Toggle mute.
+.TP
+.B [ ]
+Shift balance left / right; \fBb\fR or \fB=\fR centres it.
+.TP
+.B c, Space
+Lock/unlock channels to adjust each channel separately.
+.TP
+.B Enter
+Streams: move to another device. Devices: choose port. Configuration: choose profile.
+.TP
+.B p
+Choose the port of a device.
+.TP
+.B d
+Make the selected device the default output/input.
+.TP
+.B M
+Show or hide monitor sources on the Input Devices tab.
+.TP
+.B ?
+Help.
+.TP
+.B q, Esc
+Quit.
+.PP
+With the mouse, click a tab or an item, click inside a volume bar to set the
+volume, and use the wheel to change the volume of the item under the pointer.
+.SH REQUIREMENTS
+.BR pactl (1)
+from libpulse 16 or newer (JSON output), and a running PulseAudio or
+pipewire\-pulse server.
+.SH SEE ALSO
+.BR pactl (1),
+.BR pavucontrol (1),
+.BR wpctl (1)

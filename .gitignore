@@ -1,0 +1,15 @@
+__pycache__/
+*.egg-info/
+build/
+dist/
+.pybuild/
+packaging/arch/src/
+packaging/arch/pkg/
+packaging/arch/*.tar.gz
+packaging/arch/*.pkg.tar.*
+debian/.debhelper/
+debian/pavucli/
+debian/files
+debian/*.substvars
+debian/*.log
+debian/debhelper-build-stamp

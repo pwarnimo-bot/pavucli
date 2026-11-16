@@ -1,0 +1,39 @@
+# Maintainer: pwarnimont <pwarnimo@gmail.com>
+#
+# Local build:  `make arch` in the project root (creates the source tarball
+# and runs makepkg here), then `sudo pacman -U packaging/arch/pavucli-*.pkg.tar.zst`.
+# For the AUR: point source=() at a release tarball URL, set url= and run
+# `updpkgsums && makepkg --printsrcinfo > .SRCINFO`.
+
+pkgname=pavucli
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="pavucontrol-like terminal mixer for PulseAudio and PipeWire"
+arch=('any')
+url=''
+license=('MIT')
+depends=('python' 'libpulse')
+optdepends=('pipewire-pulse: PipeWire as the sound server'
+            'pulseaudio: PulseAudio as the sound server')
+makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
+source=("$pkgname-$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+build() {
+  cd "$pkgname-$pkgver"
+  python -m build --wheel --no-isolation
+}
+
+check() {
+  cd "$pkgname-$pkgver"
+  python -m unittest discover -s tests
+}
+
+package() {
+  cd "$pkgname-$pkgver"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 man/pavucli.1 "$pkgdir/usr/share/man/man1/pavucli.1"
+  install -Dm644 data/pavucli.desktop "$pkgdir/usr/share/applications/pavucli.desktop"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

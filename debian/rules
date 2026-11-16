@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+export PYBUILD_NAME=pavucli
+
+%:
+	dh $@ --buildsystem=pybuild
+
+override_dh_auto_test:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+	python3 -m unittest discover -s tests
+endif
