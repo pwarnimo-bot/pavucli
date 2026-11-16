@@ -3,7 +3,8 @@ Version:        0.1.0
 Release:        1%{?dist}
 Summary:        pavucontrol-like terminal mixer for PulseAudio and PipeWire
 License:        MIT
-Source0:        %{name}-%{version}.tar.gz
+URL:            https://github.com/pwarnimo-bot/pavucli
+Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildArch:      noarch
 
 BuildRequires:  python3-devel

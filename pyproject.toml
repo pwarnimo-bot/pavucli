@@ -19,6 +19,10 @@ classifiers = [
     "Topic :: Multimedia :: Sound/Audio :: Mixers",
 ]
 
+[project.urls]
+Homepage = "https://github.com/pwarnimo-bot/pavucli"
+Issues = "https://github.com/pwarnimo-bot/pavucli/issues"
+
 [project.scripts]
 pavucli = "pavucli.cli:main"
 

@@ -1,5 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: pavucli
+Source: https://github.com/pwarnimo-bot/pavucli
 
 Files: *
 Copyright: 2026 pwarnimont

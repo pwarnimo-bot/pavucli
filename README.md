@@ -71,14 +71,20 @@ make test
 
 | Distro | How |
 | --- | --- |
-| Arch Linux | `make arch` builds `packaging/arch/pavucli-*.pkg.tar.zst`, then run `sudo pacman -U packaging/arch/pavucli-*.pkg.tar.zst` |
+| Arch Linux | `cd packaging/arch && makepkg -si` builds and installs the tagged release; `make arch-local` builds your working tree into `dist/` |
 | Debian / Ubuntu | `make deb` (needs `devscripts debhelper dh-python pybuild-plugin-pyproject`) |
 | Fedora / openSUSE | `make rpm` (needs `rpm-build pyproject-rpm-macros python3-devel`) |
 | Anything else | `make install PREFIX=/usr/local`, or `pipx install .` |
 
-`make dist` creates the source tarball `dist/pavucli-<version>.tar.gz` that all the packages are built from.
-To publish on the AUR, point `source=()` in `packaging/arch/PKGBUILD` at a release tarball URL, fill in `url=`,
-then run `updpkgsums` and `makepkg --printsrcinfo > .SRCINFO`.
+`make dist` creates the source tarball `dist/pavucli-<version>.tar.gz` from the working tree.
+
+### Releasing
+
+1. Bump `__version__` in `pavucli/__init__.py`, `pkgver` in `packaging/arch/PKGBUILD`, `Version` in
+   `packaging/rpm/pavucli.spec` and add a `debian/changelog` entry, then commit
+2. `git tag -a vX.Y.Z -m "pavucli X.Y.Z" && git push --follow-tags`
+3. In `packaging/arch`: `updpkgsums && makepkg --printsrcinfo > .SRCINFO`, then commit
+4. AUR: copy `PKGBUILD` and `.SRCINFO` into your clone of `ssh://aur@aur.archlinux.org/pavucli.git` and push
 
 ## License
 

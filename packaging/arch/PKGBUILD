@@ -1,22 +1,21 @@
 # Maintainer: pwarnimont <pwarnimo@gmail.com>
 #
-# Local build:  `make arch` in the project root (creates the source tarball
-# and runs makepkg here), then `sudo pacman -U packaging/arch/pavucli-*.pkg.tar.zst`.
-# For the AUR: point source=() at a release tarball URL, set url= and run
-# `updpkgsums && makepkg --printsrcinfo > .SRCINFO`.
+# Release build:  cd packaging/arch && makepkg -si
+# Build the working tree instead of the release:  make arch-local
+# After bumping pkgver: updpkgsums && makepkg --printsrcinfo > .SRCINFO
 
 pkgname=pavucli
 pkgver=0.1.0
 pkgrel=1
 pkgdesc="pavucontrol-like terminal mixer for PulseAudio and PipeWire"
 arch=('any')
-url=''
+url='https://github.com/pwarnimo-bot/pavucli'
 license=('MIT')
 depends=('python' 'libpulse')
 optdepends=('pipewire-pulse: PipeWire as the sound server'
             'pulseaudio: PulseAudio as the sound server')
 makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
-source=("$pkgname-$pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 build() {

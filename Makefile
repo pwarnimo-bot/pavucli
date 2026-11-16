@@ -6,7 +6,7 @@ PYTHON   ?= python3
 TARBALL  := dist/$(NAME)-$(VERSION).tar.gz
 SRC_FILES := pavucli tests man data pyproject.toml README.md LICENSE Makefile packaging debian
 
-.PHONY: all run test dist install uninstall arch rpm deb clean
+.PHONY: all run test dist install uninstall arch arch-local rpm deb clean
 
 all: test
 
@@ -37,10 +37,18 @@ uninstall:
 	@echo "Remove $(PREFIX)/bin/pavucli, the pavucli package from site-packages,"
 	@echo "$(PREFIX)/share/man/man1/pavucli.1 and $(PREFIX)/share/applications/pavucli.desktop"
 
-# Arch Linux: builds packaging/arch/pavucli-*.pkg.tar.zst
-arch: dist
-	cp $(TARBALL) packaging/arch/
+# Arch Linux: build the tagged release from GitHub
+arch:
 	cd packaging/arch && makepkg -f --cleanbuild
+
+# Arch Linux: build the current working tree (unreleased changes)
+arch-local: dist
+	rm -rf build/arch && mkdir -p build/arch
+	cp $(TARBALL) build/arch/
+	sed -e 's|^source=.*|source=("$$pkgname-$$pkgver.tar.gz")|' \
+	    -e "s|^sha256sums=.*|sha256sums=('SKIP')|" packaging/arch/PKGBUILD > build/arch/PKGBUILD
+	cd build/arch && makepkg -f --cleanbuild
+	mkdir -p dist && mv build/arch/*.pkg.tar.* dist/
 
 # Fedora / openSUSE: needs rpm-build and pyproject-rpm-macros
 rpm: dist
