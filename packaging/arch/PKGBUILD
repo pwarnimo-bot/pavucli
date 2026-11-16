@@ -16,7 +16,7 @@ optdepends=('pipewire-pulse: PipeWire as the sound server'
             'pulseaudio: PulseAudio as the sound server')
 makedepends=('python-build' 'python-installer' 'python-setuptools' 'python-wheel')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('d0e687c7bd3e10f3b71fac5f7ccefccaf11d8e46b1000ef86b7d6ab947e84362')
 
 build() {
   cd "$pkgname-$pkgver"
